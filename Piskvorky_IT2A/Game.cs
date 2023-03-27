@@ -114,6 +114,8 @@ namespace Piskvorky_IT2A
                 }
             }
         }
+        public int Width { get => Left + Right + 1; }
+        public int Height { get => Top + Bottom + 1; }
 
         public void Move(int x, int y)
         {
