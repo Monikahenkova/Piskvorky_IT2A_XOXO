@@ -6,114 +6,126 @@ using System.Threading.Tasks;
 
 namespace Piskvorky_IT2A
 {
-  public class Game
-  {
-    public List<Item> Items { get; } = new List<Item>();
-    public int Top
+    public class Game
     {
-      get
-      {
-        if (Items.Count == 0)
+        public Item.Icon PlayerOnMove { get; private set; } = Item.Icon.Circle;
+        public List<Item> Items { get; } = new List<Item>();
+        public int Top
         {
-          return 0;
-        }
-        else if (Items.Count == 1)
-        {
-          return 5;
-        }
-        else
-        {
-          int top = 0;
-          foreach (Item item in Items)
-          {
-            if(item.Y < top)
+            get
             {
-              top = item.Y;
+                if (Items.Count == 0)
+                {
+                    return 0;
+                }
+                else if (Items.Count == 1)
+                {
+                    return 5;
+                }
+                else
+                {
+                    int top = 0;
+                    foreach (Item item in Items)
+                    {
+                        if (item.Y < top)
+                        {
+                            top = item.Y;
+                        }
+                    }
+                    return Math.Abs(top) + 5;
+                }
             }
-          }
-          return Math.Abs(top) + 5;
         }
-      }
-    }
-    public int Bottom
-    {
-      get
-      {
-        if (Items.Count == 0)
+        public int Bottom
         {
-          return 0;
-        }
-        else if (Items.Count == 1)
-        {
-          return 5;
-        }
-        else
-        {
-          int bottom = 0;
-          foreach (Item item in Items)
-          {
-            if (item.Y > bottom)
+            get
             {
-              bottom = item.Y;
+                if (Items.Count == 0)
+                {
+                    return 0;
+                }
+                else if (Items.Count == 1)
+                {
+                    return 5;
+                }
+                else
+                {
+                    int bottom = 0;
+                    foreach (Item item in Items)
+                    {
+                        if (item.Y > bottom)
+                        {
+                            bottom = item.Y;
+                        }
+                    }
+                    return bottom + 5;
+                }
             }
-          }
-          return bottom + 5;
         }
-      }
-    }
-    public int Left
-    {
-      get
-      {
-        if (Items.Count == 0)
+        public int Left
         {
-          return 0;
-        }
-        else if (Items.Count == 1)
-        {
-          return 5;
-        }
-        else
-        {
-          int left = 0;
-          foreach (Item item in Items)
-          {
-            if (item.X < left)
+            get
             {
-              left = item.Y;
+                if (Items.Count == 0)
+                {
+                    return 0;
+                }
+                else if (Items.Count == 1)
+                {
+                    return 5;
+                }
+                else
+                {
+                    int left = 0;
+                    foreach (Item item in Items)
+                    {
+                        if (item.X < left)
+                        {
+                            left = item.Y;
+                        }
+                    }
+                    return Math.Abs(left) + 5;
+                }
             }
-          }
-          return Math.Abs(left) + 5;
         }
-      }
-    }
-    public int Right
-    {
-      get
-      {
-        if (Items.Count == 0)
+        public int Right
         {
-          return 0;
-        }
-        else if (Items.Count == 1)
-        {
-          return 5;
-        }
-        else
-        {
-          int right = 0;
-          foreach (Item item in Items)
-          {
-            if (item.X > right)
+            get
             {
-              right = item.Y;
+                if (Items.Count == 0)
+                {
+                    return 0;
+                }
+                else if (Items.Count == 1)
+                {
+                    return 5;
+                }
+                else
+                {
+                    int right = 0;
+                    foreach (Item item in Items)
+                    {
+                        if (item.X > right)
+                        {
+                            right = item.Y;
+                        }
+                    }
+                    return Math.Abs(right) + 5;
+                }
             }
-          }
-          return Math.Abs(right) + 5;
         }
-      }
-    }
 
-
+        public void Move(int x, int y)
+        {
+            Items.Add(new Item(x, y, PlayerOnMove));
+            if(PlayerOnMove == Item.Icon.Cross)
+            {
+                PlayerOnMove = Item.Icon.Circle;
+            }
+            else
+            {
+                PlayerOnMove = Item.Icon.Cross;
+            }
+        }
   }
 }
